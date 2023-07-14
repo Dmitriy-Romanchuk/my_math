@@ -1,16 +1,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-
-void read_from_file(int* matrix_one, int* matrix_two, std::string path);
-void write_to_file();
+#include <string_view>
+#include <array>
+#include <vector>
 
 class mat3
 {
 public:
+    using data_array = std::array<int, 9>;
+
+public:
     mat3();
     mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_23, int _el_31, int _el_32, int _el_33);
-    mat3(int arr[]);
+    mat3(const data_array& arr);
     ~mat3();
     void show();
 
@@ -71,7 +74,7 @@ mat3::mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_2
     std::cout << "mat3()" << std::endl;
 }
 
-mat3::mat3(int *arr)
+mat3::mat3(const data_array& arr)
     : el_11(arr[0])
     , el_12(arr[1])
     , el_13(arr[2])
@@ -81,8 +84,7 @@ mat3::mat3(int *arr)
     , el_31(arr[6])
     , el_32(arr[7])
     , el_33(arr[8])
-{
-    
+{  
 }
 
 mat3::~mat3()
@@ -93,74 +95,88 @@ void mat3::show()
 {
     std::cout << el_11 << " " << el_12 << " " << el_13 
     << std::endl <<  el_21 << " " << el_22 << " " << el_23 
-    << std::endl <<  el_31 << " " << el_32 << " " << el_33 << std::endl;
+    << std::endl <<  el_31 << " " << el_32 << " " << el_33 << std::endl;}
+
+//-------------------------------------------------------------------------------------
+
+std::vector<int> converter_to_int(std::vector<std::string>)
+{
+    std::vector<int> data;
+
+    return data;
 }
 
-int main(int argc, char* argv[])
+//-------------------------------------------------------------------------------------
+
+void read_from_file(std::string input_path) // reading numbers from file on the disk and put them into vector<std::string> str_vec
 {
-    std::string path = "D:\\learning\\C++\\mat3\\input_matrix.txt";
-    int matrix_one[9]{};
-    int matrix_two[9]{};
-
-    read_from_file(matrix_one, matrix_two, path);
-
-    mat3 first(matrix_one);
-    mat3 second(matrix_two);
-
-    mat3 result_matrix = mat3::mutliply(first, second);
-
-    result_matrix.show();
-
-    return EXIT_SUCCESS;
-}
-
-void read_from_file(int* matrix_one, int* matrix_two, std::string path)
-{
-    int* ptr_m1 = matrix_one;
-    int* ptr_m2 = matrix_two;
-
-    std::ifstream from_file(path);
-
-    if(from_file.is_open())
-        std::cout << "File was opened" << std::endl;
+    std::ifstream source(input_path);
+    std::vector<std::string> str_vec;
+    std::string buffer = "";
+    std::string str = "";
+    
+    if(source.is_open())
+        std::cout << "File was opened." << std::endl;
     else
-        std::cout << "File cannot open" << std::endl;
-
-    for(int i = 0; i < 18; ++i)
     {
-        if(i <= 8)
+        std::cout << "File cannot open." << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    std::cout << "Starting reading..." << std::endl;
+
+    while(!source.eof())
+    {
+        getline(source, str);
+        int strlen = str.length();
+
+        for(int i = 0; i < strlen; ++i)
         {
-            from_file>>*ptr_m1;
-            ptr_m1++;
-        }
-        if(i >= 9)
-        {
-            from_file>>*ptr_m2;
-            ptr_m2++;
+            if(isdigit(str.at(i)) || str.at(i) == '-')
+            {
+                buffer += str.at(i);
+            }
+            if(str.at(i) == ' ' || i == (strlen - 1) && buffer.length() > 1)
+            {
+                str_vec.push_back(buffer);
+                buffer = "";
+            }       
         }
     }
 
-void write_to_file();
-
-    std::cout << matrix_one[0] << std::endl;
-    std::cout << matrix_one[1] << std::endl;
-    std::cout << matrix_one[2] << std::endl;
-    std::cout << matrix_one[3] << std::endl;
-    std::cout << matrix_one[4] << std::endl;
-    std::cout << matrix_one[5] << std::endl;
-    std::cout << matrix_one[6] << std::endl;
-    std::cout << matrix_one[7] << std::endl;
-    std::cout << matrix_one[8] << std::endl << std::endl;
-
-
-    std::cout << matrix_two[0] << std::endl;
-    std::cout << matrix_two[1] << std::endl;
-    std::cout << matrix_two[2] << std::endl;
-    std::cout << matrix_two[3] << std::endl;
-    std::cout << matrix_two[4] << std::endl;
-    std::cout << matrix_two[5] << std::endl;
-    std::cout << matrix_two[6] << std::endl;
-    std::cout << matrix_two[7] << std::endl;
-    std::cout << matrix_two[8] << std::endl;
+    std::cout << "Reading finished. Count of elements in vector are: " << str_vec.size() << "." << std::endl;
 }
 
+//----------------------------------------------------------------------------------------
+
+void write_to_file(std::string output_path, mat3 result)
+{
+    std::ofstream to_file(output_path);
+    if(to_file.is_open())
+        std::cout << "File was opened" << std::endl;
+
+    to_file.write((char*)&result, sizeof(result));
+
+    std::cout << "File was written!" << std::endl;
+}
+
+//----------------------------------------------------------------------------------------
+
+int main(int argc, char* argv[])
+{
+    std::string input_path = "D:\\learning\\C++\\mat3\\input_matrix.txt";
+    std::string output_path = "D:\\learning\\C++\\mat3\\output_matrix.txt";
+
+    read_from_file(input_path);
+
+    //mat3 first(matrix_one);
+    //mat3 second(matrix_two);
+
+    //mat3 result_matrix = mat3::mutliply(first, second);
+
+    //write_to_file(output_path, result_matrix);
+
+    //result_matrix.show();
+
+    return EXIT_SUCCESS;
+}
