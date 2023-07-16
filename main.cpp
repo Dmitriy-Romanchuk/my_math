@@ -112,6 +112,7 @@ void read_from_file(std::string input_path) // reading numbers from file on the 
 {
     std::ifstream source(input_path);
     std::vector<std::string> str_vec;
+    std::vector<int> int_vec;
     std::string buffer = "";
     std::string str = "";
     
@@ -129,7 +130,7 @@ void read_from_file(std::string input_path) // reading numbers from file on the 
     {
         getline(source, str);
         int strlen = str.length();
-
+ 
         for(int i = 0; i < strlen; ++i)
         {
             if(isdigit(str.at(i)) || str.at(i) == '-')
@@ -138,13 +139,34 @@ void read_from_file(std::string input_path) // reading numbers from file on the 
             }
             if(str.at(i) == ' ' || i == (strlen - 1) && buffer.length() > 1)
             {
-                str_vec.push_back(buffer);
+
+                int_vec.push_back(stoi(buffer)); //added stoi
                 buffer = "";
             }       
         }
     }
 
-    std::cout << "Reading finished. Count of elements in vector are: " << str_vec.size() << "." << std::endl;
+    std::cout << "Reading finished. Count of elements in vector are: " << __has_include_next.size() << "." << std::endl;
+}
+
+//----------------------------------------------------------------------------------------
+
+std::vector<int> str_to_int(std::vector<std::string> &str_vec)
+{
+    std::vector<int> int_vec;
+    std::vector<int>::iterator int_it = int_vec.begin();
+    std::vector<string>::iterator str_it = str_vec.begin();
+
+    while(!str_it.end())
+    {
+
+
+
+
+
+    }
+
+    return int_vec;
 }
 
 //----------------------------------------------------------------------------------------
