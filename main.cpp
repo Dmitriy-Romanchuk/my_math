@@ -4,6 +4,7 @@
 #include <string_view>
 #include <array>
 #include <vector>
+#include <iomanip>
 
 class mat3
 {
@@ -13,7 +14,7 @@ public:
 public:
     mat3();
     mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_23, int _el_31, int _el_32, int _el_33);
-    mat3(const data_array& arr);
+    mat3(std::vector<int> &);
     ~mat3();
     void show();
 
@@ -57,7 +58,6 @@ mat3::mat3()
     , el_32(0)
     , el_33(0)
 {
-    std::cout << "mat3()" << std::endl;
 }
 
 mat3::mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_23, int _el_31, int _el_32, int _el_33)
@@ -71,47 +71,37 @@ mat3::mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_2
     , el_32(_el_32)
     , el_33(_el_33)
 {
-    std::cout << "mat3()" << std::endl;
 }
 
-mat3::mat3(const data_array& arr)
-    : el_11(arr[0])
-    , el_12(arr[1])
-    , el_13(arr[2])
-    , el_21(arr[3])
-    , el_22(arr[4])
-    , el_23(arr[5])
-    , el_31(arr[6])
-    , el_32(arr[7])
-    , el_33(arr[8])
+mat3::mat3(std::vector<int> &int_vec)
+    : el_11 (int_vec[0])
+    , el_12 (int_vec[1])
+    , el_13 (int_vec[2])
+    , el_21 (int_vec[3])
+    , el_22 (int_vec[4])
+    , el_23 (int_vec[5])
+    , el_31 (int_vec[6])
+    , el_32 (int_vec[7])
+    , el_33 (int_vec[8])
 {  
+    int_vec.erase(int_vec.begin(), int_vec.begin() + 9);
 }
 
 mat3::~mat3()
 {
-    std::cout << "~mat3()" << std::endl;
 }
 void mat3::show()
 {
     std::cout << el_11 << " " << el_12 << " " << el_13 
     << std::endl <<  el_21 << " " << el_22 << " " << el_23 
-    << std::endl <<  el_31 << " " << el_32 << " " << el_33 << std::endl;}
-
-//-------------------------------------------------------------------------------------
-
-std::vector<int> converter_to_int(std::vector<std::string>)
-{
-    std::vector<int> data;
-
-    return data;
+    << std::endl <<  el_31 << " " << el_32 << " " << el_33 << std::endl << std::endl;
 }
 
 //-------------------------------------------------------------------------------------
 
-void read_from_file(std::string input_path) // reading numbers from file on the disk and put them into vector<std::string> str_vec
+std::vector<int> read_from_file(std::string input_path) // reading numbers from file on the disk and put them into vector<int> int_vec
 {
     std::ifstream source(input_path);
-    std::vector<std::string> str_vec;
     std::vector<int> int_vec;
     std::string buffer = "";
     std::string str = "";
@@ -139,32 +129,13 @@ void read_from_file(std::string input_path) // reading numbers from file on the 
             }
             if(str.at(i) == ' ' || i == (strlen - 1) && buffer.length() > 1)
             {
-
-                int_vec.push_back(stoi(buffer)); //added stoi
+                int_vec.push_back(stoi(buffer));
                 buffer = "";
             }       
         }
     }
 
-    std::cout << "Reading finished. Count of elements in vector are: " << __has_include_next.size() << "." << std::endl;
-}
-
-//----------------------------------------------------------------------------------------
-
-std::vector<int> str_to_int(std::vector<std::string> &str_vec)
-{
-    std::vector<int> int_vec;
-    std::vector<int>::iterator int_it = int_vec.begin();
-    std::vector<string>::iterator str_it = str_vec.begin();
-
-    while(!str_it.end())
-    {
-
-
-
-
-
-    }
+    std::cout << "Reading finished. Count of elements in vector are: " << int_vec.size() << "." << std::endl;
 
     return int_vec;
 }
@@ -186,19 +157,27 @@ void write_to_file(std::string output_path, mat3 result)
 
 int main(int argc, char* argv[])
 {
-    std::string input_path = "D:\\learning\\C++\\mat3\\input_matrix.txt";
-    std::string output_path = "D:\\learning\\C++\\mat3\\output_matrix.txt";
+    std::string input_path = "../input_matrix.txt";
+    std::string output_path = "../output_matrix.txt";
 
-    read_from_file(input_path);
+    std::vector<int> initializer = read_from_file(input_path);
 
-    //mat3 first(matrix_one);
-    //mat3 second(matrix_two);
+    mat3 first(initializer);
+    first.show();
+    mat3 second(initializer);
+    second.show();
+    mat3 result_matrix = mat3::mutliply(first, second);
 
-    //mat3 result_matrix = mat3::mutliply(first, second);
+    mat3 read;
 
-    //write_to_file(output_path, result_matrix);
+    write_to_file(output_path, result_matrix);
 
-    //result_matrix.show();
+    result_matrix.show();
+
+    std::cout << "Read from file output_matrix.txt:" << std::endl;
+    std::ifstream infile("../output_matrix.txt", std::ios::binary);
+    infile.read(reinterpret_cast<char*>(&read), sizeof(read));
+    read.show(); 
 
     return EXIT_SUCCESS;
 }
