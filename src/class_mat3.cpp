@@ -1,8 +1,6 @@
 #include "class_mat3.h"
 #include <iostream>
 
-
-
 mat3::mat3()
     : el_11(0)
     , el_12(0)

@@ -59,5 +59,3 @@ void write_to_file(std::string output_path, mat3 result)
 
     std::cout << "File was written!" << std::endl;
 }
-
-//------------------------------------------------------------------------------------------------------------
