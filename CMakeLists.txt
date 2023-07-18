@@ -4,4 +4,6 @@ SET(CMAKE_CXX_COMPILER g++)
 
 project(main)
 
-add_executable(mat3 main.cpp)
+include_directories(./src)
+
+add_executable(mat3 src/main.cpp src/helpers.cpp src/class_mat3.cpp)
