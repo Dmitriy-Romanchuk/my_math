@@ -9,8 +9,8 @@ public:
     mat3(std::vector<int> &);
     ~mat3();
     void show();
-    static void mutliply(const mat3 &first, const mat3 &second, mat3& result);
-    static mat3 mutliply(const mat3 &first, const mat3 &second);
+    static void multiply(const mat3 &first, const mat3 &second, mat3& result);
+    static mat3 multiply(const mat3 &first, const mat3 &second);
 
 private:
     int el_11, el_12, el_13;

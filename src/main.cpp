@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
     first.show();
     mat3 second(initializer);
     second.show();
-    mat3 result_matrix = mat3::mutliply(first, second);
+    mat3 result_matrix = mat3::multiply(first, second);
 
     mat3 read;
 

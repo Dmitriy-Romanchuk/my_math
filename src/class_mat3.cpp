@@ -52,7 +52,7 @@ void mat3::show()
     << std::endl <<  el_31 << " " << el_32 << " " << el_33 << std::endl << std::endl;
 }
 
-void mat3::mutliply(const mat3 &first, const mat3 &second, mat3& result)
+void mat3::multiply(const mat3 &first, const mat3 &second, mat3& result)
     {
         result.el_11 = first.el_11 * second.el_11 + first.el_12 * second.el_21 + first.el_13 * second.el_31;
         result.el_12 = first.el_11 * second.el_12 + first.el_12 * second.el_22 + first.el_13 * second.el_32;
@@ -67,9 +67,9 @@ void mat3::mutliply(const mat3 &first, const mat3 &second, mat3& result)
         result.el_33 = first.el_31 * second.el_13 + first.el_32 * second.el_23 + first.el_33 * second.el_33;
     }
 
-mat3 mat3::mutliply(const mat3 &first, const mat3 &second)
+mat3 mat3::multiply(const mat3 &first, const mat3 &second)
     {
         mat3 result;
-        mutliply(first, second, result);
+        multiply(first, second, result);
         return result;
     }
