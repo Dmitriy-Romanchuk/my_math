@@ -1,9 +1,10 @@
+#include "class_mat3.h"
+#include "helpers.h"
+
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include "class_mat3.h"
-#include "helpers.h"
 
 int main(int argc, char* argv[])
 {
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
     if(argc > 2)
     {  
         std::cout << "To many argument in main function: " << argc << ". Max argc = 2;" << std::endl; 
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 
     if(argc == 2)
@@ -23,7 +24,7 @@ int main(int argc, char* argv[])
 
     if(argc == 1)
     {
-        input_path = "../input_matrix.txt";
+        input_path = "input_matrix.txt";
     }
 
     std::vector<int> initializer = read_from_file(input_path);
