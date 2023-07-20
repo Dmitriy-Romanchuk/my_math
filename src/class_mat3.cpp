@@ -1,4 +1,5 @@
 #include "class_mat3.h"
+
 #include <iostream>
 
 mat3::mat3()
