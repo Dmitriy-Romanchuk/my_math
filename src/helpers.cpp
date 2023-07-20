@@ -7,7 +7,7 @@
 
 //------------------------------------------------------------------------------------------------------------
 
-std::vector<int> read_from_file(std::string input_path) // reading numbers from file on the disk and put them into vector<int> int_vec
+std::vector<int> read_from_file(const std::string &input_path) // reading numbers from file on the disk and put them into vector<int> int_vec
 {
     std::ifstream source(input_path.c_str());
     std::vector<int> int_vec;
@@ -52,7 +52,7 @@ std::vector<int> read_from_file(std::string input_path) // reading numbers from 
 
 //------------------------------------------------------------------------------------------------------------
 
-void write_to_file(std::string output_path, mat3 result)
+void write_to_file(const std::string &output_path, const mat3 &result)
 {
     std::ofstream to_file(output_path);
     if (to_file.is_open())

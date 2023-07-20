@@ -6,10 +6,16 @@
 #include <string>
 #include <vector>
 
+namespace
+{
+    constexpr const char *default_input_path = "input_matrix.txt";
+    constexpr const char *default_output_path = "output_matrix.txt";
+} // namespace
+
 int main(int argc, char *argv[])
 {
-    std::string input_path = "";
-    std::string output_path = "../output_matrix.txt";
+    std::string input_path(default_input_path);
+    std::string output_path(default_output_path);
 
     if (argc > 2)
     {
@@ -22,11 +28,6 @@ int main(int argc, char *argv[])
         input_path = argv[1];
     }
 
-    if (argc == 1)
-    {
-        input_path = "input_matrix.txt";
-    }
-
     std::vector<int> initializer = read_from_file(input_path);
 
     mat3 first(initializer);
@@ -35,15 +36,13 @@ int main(int argc, char *argv[])
     second.show();
     mat3 result_matrix = mat3::multiply(first, second);
 
-    mat3 read;
-
     write_to_file(output_path, result_matrix);
-
     result_matrix.show();
 
     std::cout << "Read from file output_matrix.txt:" << std::endl;
-    std::ifstream infile("../output_matrix.txt", std::ios::binary);
-    infile.read(reinterpret_cast<char *>(&read), sizeof(read));
+    mat3 read;
+    std::ifstream file(output_path.c_str(), std::ios::binary);
+    file.read(reinterpret_cast<char *>(&read), sizeof(read));
     read.show();
 
     return EXIT_SUCCESS;
