@@ -4,5 +4,5 @@
 
 #include <string>
 
-void write_to_file(std::string output_path, mat3 result);
-std::vector<int> read_from_file(std::string input_path);
+std::vector<int> read_from_file(const std::string &input_path);
+void write_to_file(const std::string &output_path, const mat3 &result);
