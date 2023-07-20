@@ -10,7 +10,7 @@ public:
     mat3(std::vector<int> &);
     ~mat3();
     void show();
-    static void multiply(const mat3 &first, const mat3 &second, mat3& result);
+    static void multiply(const mat3 &first, const mat3 &second, mat3 &result);
     static mat3 multiply(const mat3 &first, const mat3 &second);
 
 private:

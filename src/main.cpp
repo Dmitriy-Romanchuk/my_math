@@ -6,23 +6,23 @@
 #include <string>
 #include <vector>
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     std::string input_path = "";
-    std::string output_path = "../output_matrix.txt"; 
-    
-    if(argc > 2)
-    {  
-        std::cout << "To many argument in main function: " << argc << ". Max argc = 2;" << std::endl; 
+    std::string output_path = "../output_matrix.txt";
+
+    if (argc > 2)
+    {
+        std::cout << "To many argument in main function: " << argc << ". Max argc = 2;" << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    if(argc == 2)
+    if (argc == 2)
     {
         input_path = argv[1];
     }
 
-    if(argc == 1)
+    if (argc == 1)
     {
         input_path = "input_matrix.txt";
     }
@@ -43,8 +43,8 @@ int main(int argc, char* argv[])
 
     std::cout << "Read from file output_matrix.txt:" << std::endl;
     std::ifstream infile("../output_matrix.txt", std::ios::binary);
-    infile.read(reinterpret_cast<char*>(&read), sizeof(read));
-    read.show(); 
+    infile.read(reinterpret_cast<char *>(&read), sizeof(read));
+    read.show();
 
     return EXIT_SUCCESS;
 }
