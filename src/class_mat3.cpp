@@ -53,3 +53,13 @@ mat3 mat3::multiply(const mat3 &first, const mat3 &second)
     multiply(first, second, result);
     return result;
 }
+
+bool mat3::operator==(mat3 m) const
+{
+    return el_11 == m.el_11 && el_12 == m.el_12 && el_13 == m.el_13 && el_21 == m.el_21 && el_22 == m.el_22 && el_23 == m.el_23 && el_31 == m.el_31 && el_32 == m.el_32 && el_33 == m.el_33;
+}
+
+bool mat3::operator!=(const mat3& other) const
+{
+    return (*this == other) == false;
+}
