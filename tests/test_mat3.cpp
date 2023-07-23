@@ -1,22 +1,27 @@
-#include <iostream>
-#include <vector>
 #include "class_mat3.h"
+
+#include <iostream>
 
 int main()
 {
-    std::vector<int> a = {5, 0, 0,
+
+    mat3 first_matrix = {5, 0, 0,
+                         0, 5, 0,
+                         0, 0, 5};
+
+    mat3 second_matrix = {5, 0, 0,
                           0, 5, 0,
                           0, 0, 5};
-    std::vector<int> b = {5, 0, 0,
-                          0, 5, 0,
-                          0, 0, 5};
 
-    mat3 reference{25, 0, 0,
-                   0, 25, 0,
-                   0, 0, 25};
-    mat3 test;
+    mat3 reference = {25, 0, 0,
+                      0, 25, 0,
+                      0, 0, 25};
+    mat3 tester;
 
-    test.multiply(a, b);
+    tester.multiply(first_matrix, second_matrix);
 
-    return EXIT_SUCCESS;
+    if(tester == reference)
+        return EXIT_SUCCESS;
+    else
+        return EXIT_FAILURE;
 }

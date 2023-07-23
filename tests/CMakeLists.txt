@@ -7,7 +7,7 @@ set(test1_source
 
 add_executable(test1 ${test1_source})
 
-# target_link_libraries(test1 ${Boost_LIBRARIES} calc)
+target_link_libraries(test1 ${Boost_LIBRARIES} main)
 enable_testing()
 
 # add_test(Test_0, src/main.cpp)
