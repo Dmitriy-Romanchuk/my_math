@@ -54,12 +54,12 @@ mat3 mat3::multiply(const mat3 &first, const mat3 &second)
     return result;
 }
 
-bool mat3::operator==(const mat3 &other)
+bool mat3::operator==(const mat3 &other) const
 {
     return (el_11 == other.el_11 && el_12 == other.el_12 && el_13 == other.el_13 && el_21 == other.el_21 && el_22 == other.el_22 && el_23 == other.el_23 && el_31 == other.el_31 && el_32 == other.el_32 && el_33 == other.el_33);
 }
 
-// bool mat3::operator!=(const mat3& other) const
-//{
-//     return (*this == other) == false;
-// }
+bool mat3::operator!=(const mat3& other) const
+{
+     return (*this == other) == false;
+}

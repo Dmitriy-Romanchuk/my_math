@@ -4,11 +4,12 @@
 #include <iostream>
 #include <string>
 
-std::string output = "output.txt";
+int main()
+{
+    //TO DO
+    return EXIT_FAILURE;
+}
 
-mat3 reference { 1, 2, 3,
-                 4, 5, 6,
-                 7, 8, 9 };
 
 
 
