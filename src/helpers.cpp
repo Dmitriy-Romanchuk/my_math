@@ -14,17 +14,13 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
     std::string buffer = "";
     std::string str = "";
 
-    if (source.is_open())
-    {
-        std::cout << "File was opened." << std::endl;
-    }
-    else
+    if (!source.is_open())
     {
         std::cout << "File cannot open." << std::endl;
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Starting reading..." << std::endl;
+    std::cout << "Starting reading matrix from file..." << std::endl;
 
     while (!source.eof())
     {
@@ -45,7 +41,8 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
         }
     }
 
-    std::cout << "Reading finished. Count of elements in vector are: " << int_vec.size() << "." << std::endl;
+    std::cout << "Reading finished. " << int_vec.size() << " numbers were read:" << std::endl
+              << std::endl;
 
     return int_vec;
 }
@@ -54,27 +51,19 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
 
 void write_to_file(const std::string &output_path, const mat3 &result)
 {
-    std::ofstream to_file(output_path);
-    if (to_file.is_open())
-        std::cout << "File was opened" << std::endl;
+    std::ofstream output(output_path);
+    if (!output.is_open())
+    {
+        std::cout << "File cannot open." << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
     std::vector<int> data = result.get_data();
 
-    //size_t counter = 0u;
-    //for (const auto &element : data)
-    //{
-    //    to_file << element << " ";
-    //    counter++;
-    //    if (counter % 3 == 0)
-    //    {
-    //        to_file << "\n";
-    //    }
-    //}
-    for (size_t i = 0; i < data.size(); i+=3)
+    for (size_t i = 0; i < data.size(); i += 3)
     {
-        to_file << data[i] << " " << data[i + 1] << " " << data[i + 2] << "\n";
+        output << data[i] << " " << data[i + 1] << " " << data[i + 2] << "\n";
     }
-    
 
     std::cout << "File was written!" << std::endl;
 }

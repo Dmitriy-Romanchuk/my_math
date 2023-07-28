@@ -25,10 +25,8 @@ mat3::~mat3()
 
 void mat3::show()
 {
-    std::cout << el_11 << " " << el_12 << " " << el_13
-              << std::endl
-              << el_21 << " " << el_22 << " " << el_23
-              << std::endl
+    std::cout << el_11 << " " << el_12 << " " << el_13 << std::endl
+              << el_21 << " " << el_22 << " " << el_23 << std::endl
               << el_31 << " " << el_32 << " " << el_33 << std::endl
               << std::endl;
 }
@@ -60,9 +58,9 @@ bool mat3::operator==(const mat3 &other) const
     return (el_11 == other.el_11 && el_12 == other.el_12 && el_13 == other.el_13 && el_21 == other.el_21 && el_22 == other.el_22 && el_23 == other.el_23 && el_31 == other.el_31 && el_32 == other.el_32 && el_33 == other.el_33);
 }
 
-bool mat3::operator!=(const mat3& other) const
+bool mat3::operator!=(const mat3 &other) const
 {
-     return (*this == other) == false;
+    return (*this == other) == false;
 }
 
 std::vector<int> mat3::get_data() const
