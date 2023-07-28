@@ -58,7 +58,23 @@ void write_to_file(const std::string &output_path, const mat3 &result)
     if (to_file.is_open())
         std::cout << "File was opened" << std::endl;
 
-    to_file.write((char *)&result, sizeof(result));
+    std::vector<int> data = result.get_data();
+
+    //size_t counter = 0u;
+    //for (const auto &element : data)
+    //{
+    //    to_file << element << " ";
+    //    counter++;
+    //    if (counter % 3 == 0)
+    //    {
+    //        to_file << "\n";
+    //    }
+    //}
+    for (size_t i = 0; i < data.size(); i+=3)
+    {
+        to_file << data[i] << " " << data[i + 1] << " " << data[i + 2] << "\n";
+    }
+    
 
     std::cout << "File was written!" << std::endl;
 }

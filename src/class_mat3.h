@@ -14,6 +14,7 @@ public:
     static mat3 multiply(const mat3 &first, const mat3 &second);
     bool operator== (const mat3& other) const;
     bool operator!= (const mat3& other) const;
+    std::vector<int> get_data() const;
 
 private:
     int el_11, el_12, el_13;

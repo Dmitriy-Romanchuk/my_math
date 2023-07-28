@@ -1,6 +1,7 @@
 #include "class_mat3.h"
 
 #include <iostream>
+#include <vector>
 
 mat3::mat3()
     : el_11(0), el_12(0), el_13(0), el_21(0), el_22(0), el_23(0), el_31(0), el_32(0), el_33(0)
@@ -62,4 +63,11 @@ bool mat3::operator==(const mat3 &other) const
 bool mat3::operator!=(const mat3& other) const
 {
      return (*this == other) == false;
+}
+
+std::vector<int> mat3::get_data() const
+{
+    std::vector<int> elements = {el_11, el_12, el_13, el_21, el_22, el_23, el_31, el_32, el_33};
+
+    return elements;
 }
