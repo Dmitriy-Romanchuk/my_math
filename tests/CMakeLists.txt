@@ -11,5 +11,5 @@ add_executable(tests ${TEST_SOURCE})
 target_link_libraries(tests PRIVATE simple_test)
 target_compile_features(tests PRIVATE cxx_std_17)
 
-add_test(NAME Test_1 COMMAND tests test_1)
+add_test(NAME Test_1 COMMAND tests test_1 success)
 add_test(NAME Test_2 COMMAND tests test_2)
