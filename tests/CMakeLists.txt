@@ -9,7 +9,10 @@ set(TEST_SOURCE
 
 add_executable(tests ${TEST_SOURCE})
 target_link_libraries(tests PRIVATE simple_test)
+target_link_libraries(tests PRIVATE main)
 target_compile_features(tests PRIVATE cxx_std_17)
 
-add_test(NAME Test_1 COMMAND tests test_1 success)
-add_test(NAME Test_2 COMMAND tests test_2)
+add_test(NAME Test_multiply COMMAND tests test_multiply)
+add_test(NAME Test_equal_operator COMMAND tests test_equal_operator)
+add_test(NAME Test_no_equal_operator COMMAND tests test_no_equal_operator)
+add_test(NAME Test_read_from_file COMMAND tests test_read_from_file)
