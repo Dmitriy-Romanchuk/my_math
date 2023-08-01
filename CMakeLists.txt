@@ -6,6 +6,11 @@ project(main)
 
 include_directories(./src)
 
+file(GLOB TARGET_SRC
+    ./tests/src/*.cpp
+)
+
+add_executable(main_T ${TARGET_SRC})
 
 set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp

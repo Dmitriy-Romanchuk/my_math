@@ -1,26 +1,15 @@
-cmake_minimum_required(VERSION 3.21.3)
+cmake_minimum_required(VERSION 3.20 FATAL_ERROR)
 project(tests)
 
-# find_package (Boost COMPONENTS unit_test_framework REQUIRED)
-set(test_source
-    ${CMAKE_CURRENT_SOURCE_DIR/} test_multiply.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR/} test_read_from_file.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR/} test_equal_operator.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR/} test_not_equal_operator.cpp
-    )
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/simple_test)
 
-add_executable(test_multiply test_multiply.cpp)
-add_executable(test_read_from_file test_read_from_file.cpp)
-add_executable(test_equal_operator test_equal_operator.cpp)
-add_executable(test_not_equal_operator test_not_equal_operator.cpp)
+set(TEST_SOURCE
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
+)
 
-target_link_libraries(test_multiply ${Boost_LIBRARIES} main)
-target_link_libraries(test_read_from_file ${Boost_LIBRARIES} main)
-target_link_libraries(test_equal_operator ${Boost_LIBRARIES} main)
-target_link_libraries(test_not_equal_operator ${Boost_LIBRARIES} main)
-enable_testing()
+add_executable(tests ${TEST_SOURCE})
+target_link_libraries(tests PRIVATE simple_test)
+target_compile_features(tests PRIVATE cxx_std_17)
 
-add_test(NAME test_multiply COMMAND test_multiply)
-add_test(NAME test_read_from_file COMMAND test_read_from_file)
-add_test(NAME test_equal_operator COMMAND test_equal_operator)
-add_test(NAME test_not_equal_operator COMMAND test_not_equal_operator)
+add_test(NAME Test_1 COMMAND tests test_1)
+add_test(NAME Test_2 COMMAND tests test_2)
