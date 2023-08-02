@@ -12,21 +12,26 @@ std::vector<std::string> splitString(std::string_view str, char delimetr)
 {
     std::vector<std::string> result;
 
-    size_t strlen = str.length();
+    int pos = 0;
+    int count = 0;
+    std::string buffer;
 
-     for (int i = 0; i < strlen; ++i)
-     {
-         if (::isdigit(str.at(i)) || str.at(i) == '-')
-         {
-             buffer += str.at(i);
-         }
-        
-         if ((str.at(i) == ' ' || i == (strlen - 1)) && buffer.empty() == false)
-         {
-             result.push_back(buffer);
-             buffer.clear();
-         }
-     }
+    for (auto &&symbol : str)
+    {
+        std::cout << "test split " << symbol << std::endl; 
+        if (::isdigit(symbol) || symbol == '-')
+        {
+            ++count;
+        }
+        else if (symbol == delimetr)
+        {
+            buffer = str.substr(pos, count);
+            pos = count + 1;
+            count = 0;
+            result.push_back(buffer);
+            buffer.clear();
+        }
+    }
 
     return result;
 }
@@ -49,15 +54,15 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
    
     while (!source.eof())
     {
+        std::cout << "Test while cycle" << std::endl;
         getline(source, str);
+        std::cout << "test getline " << str << std::endl;
         auto x = splitString(str, ' ');
 
         for (const auto& digit : x)
         {
             int_vec.push_back(stoi(digit));
         }
-        
-        return int_vec;
     }
 
     std::cout << "Reading finished. " << int_vec.size() << " numbers were read!" << std::endl
