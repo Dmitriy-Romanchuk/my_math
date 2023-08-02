@@ -3,15 +3,39 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <vector>
 
 //------------------------------------------------------------------------------------------------------------
+
+std::vector<std::string> splitString(std::string_view str, char delimetr)
+{
+    std::vector<std::string> result;
+
+    size_t strlen = str.length();
+
+     for (int i = 0; i < strlen; ++i)
+     {
+         if (::isdigit(str.at(i)) || str.at(i) == '-')
+         {
+             buffer += str.at(i);
+         }
+        
+         if ((str.at(i) == ' ' || i == (strlen - 1)) && buffer.empty() == false)
+         {
+             result.push_back(buffer);
+             buffer.clear();
+         }
+     }
+
+    return result;
+}
 
 std::vector<int> read_from_file(const std::string &input_path) // reading numbers from file on the disk and put them into vector<int> int_vec
 {
     std::ifstream source(input_path.c_str());
     std::vector<int> int_vec;
-    std::string buffer = "";
+    
     std::string str = "";
 
     if (!source.is_open())
@@ -22,30 +46,27 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
 
     std::cout << "Starting reading matrix from file..." << std::endl;
 
+   
     while (!source.eof())
     {
         getline(source, str);
-        int strlen = str.length();
+        auto x = splitString(str, ' ');
 
-        for (int i = 0; i < strlen; ++i)
+        for (const auto& digit : x)
         {
-            if (isdigit(str.at(i)) || str.at(i) == '-')
-            {
-                buffer += str.at(i);
-            }
-            if (str.at(i) == ' ' || i == (strlen - 1) && buffer.length() > 1)
-            {
-                int_vec.push_back(stoi(buffer));
-                buffer = "";
-            }
+            int_vec.push_back(stoi(digit));
         }
+        
+        return int_vec;
     }
 
-    std::cout << "Reading finished. " << int_vec.size() << " numbers were read:" << std::endl
+    std::cout << "Reading finished. " << int_vec.size() << " numbers were read!" << std::endl
               << std::endl;
 
     return int_vec;
 }
+
+
 
 //------------------------------------------------------------------------------------------------------------
 

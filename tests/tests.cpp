@@ -1,9 +1,12 @@
 #include "class_mat3.h"
+#include "helpers.h"
 #include "simple_test.hpp"
 
 #include <cstdlib>
-#include <iostream>
 #include <cstring>
+#include <iostream>
+#include <string>
+#include <vector>
 
 int test_multiply([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
@@ -16,15 +19,14 @@ int test_multiply([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
                           0, 0, 5};
 
     mat3 expected = {25, 0, 0,
-                      0, 25, 0,
-                      0, 0, 25};
+                     0, 25, 0,
+                     0, 0, 25};
 
     mat3 current = mat3::multiply(first_matrix, second_matrix);
 
-    if (current == expected)
-        return EXIT_SUCCESS;
-    else
-        return EXIT_FAILURE;
+    std::cout << "test Dima" << std::endl;
+
+    return (current == expected) == EXIT_SUCCESS;
 }
 
 int test_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
@@ -37,10 +39,7 @@ int test_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *argv[]
                           0, 5, 0,
                           0, 0, 5};
 
-    if (first_matrix == second_matrix)
-        return EXIT_SUCCESS;
-    else
-        return EXIT_FAILURE;
+    return (first_matrix == second_matrix) == EXIT_SUCCESS;
 }
 
 int test_no_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
@@ -53,19 +52,27 @@ int test_no_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *arg
                           0, 5, 0,
                           0, 0, 5};
 
-    if (first_matrix != second_matrix)
-        return EXIT_SUCCESS;
-    else
-        return EXIT_FAILURE;
+    return !(first_matrix != second_matrix) == true;
 }
 
 int test_read_from_file([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
-    
-    
-    return EXIT_SUCCESS;
-}
+   
+    const char* path = "D:\\learning\\C++\\mat3\\tests\\output_matrix.txt";
 
+    mat3 first_matrix = {10, 0, 0,
+                         0, 10, 0,
+                         0, 0, 10};
+
+    write_to_file(path, first_matrix);
+
+    std::vector<int> init = read_from_file(path);
+    
+    mat3 second_matrix(init);
+    second_matrix.show();
+
+    return (first_matrix == second_matrix) == EXIT_SUCCESS;
+}
 
 void initializeTests()
 {
