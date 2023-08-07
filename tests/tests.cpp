@@ -58,7 +58,7 @@ int test_no_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *arg
 int test_read_from_file([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
    
-    const char* path = "D:\\learning\\C++\\mat3\\tests\\output_matrix.txt"; // TO DO change default path
+    const char* path = "output_matrix.txt";
 
     mat3 first_matrix = {10, 0, 0,
                          0, 10, 0,
