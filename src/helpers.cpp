@@ -8,24 +8,28 @@
 
 //------------------------------------------------------------------------------------------------------------
 
-std::vector<std::string> splitString(const std::string &str, char delimeter)
+std::vector<std::string> splitString(std::string_view str, char delimetr)
 {
-    const auto size = str.size();
-    size_t pos = 0u;
     std::vector<std::string> result;
 
-    for (size_t i = 0; i <= size; i++)
+    int pos = 0;
+    int count = 0;
+    std::string buffer;
+
+    for (auto &&symbol : str)
     {
-        if ((i == size || str[i] == delimeter) && i > pos)
+        std::cout << "test split " << symbol << std::endl; 
+        if (::isdigit(symbol) || symbol == '-')
         {
-            result.push_back(str.substr(pos, i - pos));
-
-            while (i < size && str[i] == delimeter)
-            {
-                i++;
-            }
-
-            pos = i;
+            ++count;
+        }
+        else if (symbol == delimetr)
+        {
+            buffer = str.substr(pos, count);
+            pos = count + 1;
+            count = 0;
+            result.push_back(buffer);
+            buffer.clear();
         }
     }
 
@@ -36,7 +40,7 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
 {
     std::ifstream source(input_path.c_str());
     std::vector<int> int_vec;
-
+    
     std::string str = "";
 
     if (!source.is_open())
@@ -47,6 +51,7 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
 
     std::cout << "Starting reading matrix from file..." << std::endl;
 
+   
     while (!source.eof())
     {
         std::cout << "Test while cycle" << std::endl;
@@ -54,7 +59,7 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
         std::cout << "test getline " << str << std::endl;
         auto x = splitString(str, ' ');
 
-        for (const auto &digit : x)
+        for (const auto& digit : x)
         {
             int_vec.push_back(stoi(digit));
         }
@@ -65,6 +70,8 @@ std::vector<int> read_from_file(const std::string &input_path) // reading number
 
     return int_vec;
 }
+
+
 
 //------------------------------------------------------------------------------------------------------------
 
