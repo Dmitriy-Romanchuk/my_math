@@ -12,9 +12,11 @@ public:
     Mat3Storage();
     ~Mat3Storage();
 public:
-    void init(const std::string& file);
+    std::string scan_file(const std::string& file);
     const mat3& get(const std::string& id);
     bool try_add(const std::string& id, const mat3& mat);
+
+private:
 
 private:
     std::unordered_map<std::string, int> storage;
