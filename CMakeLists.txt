@@ -10,6 +10,7 @@ set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/helpers.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/class_mat3.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/storage.cpp
 )
 add_library(main STATIC ${SOURCE})
 

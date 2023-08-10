@@ -13,17 +13,16 @@ mat3::mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_2
 {
 }
 
-mat3::mat3(std::vector<int> &int_vec)
-    : el_11(int_vec[0]), el_12(int_vec[1]), el_13(int_vec[2]), el_21(int_vec[3]), el_22(int_vec[4]), el_23(int_vec[5]), el_31(int_vec[6]), el_32(int_vec[7]), el_33(int_vec[8])
+mat3::mat3(int* arr)
+    : el_11(arr[0]), el_12(arr[1]), el_13(arr[2]), el_21(arr[3]), el_22(arr[4]), el_23(arr[5]), el_31(arr[6]), el_32(arr[7]), el_33(arr[8])
 {
-    int_vec.erase(int_vec.begin(), int_vec.begin() + 9);
 }
 
 mat3::~mat3()
 {
 }
 
-void mat3::show()
+void mat3::show() const
 {
     std::cout << el_11 << " " << el_12 << " " << el_13 << std::endl
               << el_21 << " " << el_22 << " " << el_23 << std::endl

@@ -1,6 +1,8 @@
-#include "storage.hpp"
+#include "class_mat3.h"
 #include "helpers.h"
+#include "storage.hpp"
 
+#include <cassert>
 #include <iostream>
 #include <fstream>
 
@@ -12,12 +14,11 @@ Mat3Storage::~Mat3Storage()
 {
 }
 
-std::string Mat3Storage::scan_file(const std::string &file)
+void Mat3Storage::scan_file(const std::string &file)
 {
     std::ifstream source(file.c_str());
     std::string line;
-    std::string buffer;
-    std::vector<int> matrix;
+    std::string id;
     
     if (!source.is_open())
     {
@@ -29,44 +30,44 @@ std::string Mat3Storage::scan_file(const std::string &file)
 
     while (!source.eof())
     {
-      getline(source, line);
-      if(line.ends_with(":"))
-      {
-        for (size_t i = 0; i < 3; ++i)
+        getline(source, line);
+
+        if ((line[line.size() - 1]) == ':')
         {
-            getline(source, line);
-            auto x = splitString(line, ' ');
-            for (const auto &digit : x)
-            {
-                matrix.append(stoi(digit));
-        
-            }
-        
+            id = line.substr(0, line.size() - 1);
+            std::cout << id << std::endl;
 
-      }
+            //for (size_t i = 0; i < 3; ++i)
+            //{
+            //    getline(source, line);
+//
+            //    auto x = splitString(line, ' ');
+//
+            //    for (const auto &digit : x)
+            //    {
+            //        int_vec.push_back(stoi(digit));
+            //    }
+            //}
+            
+            
+            m_storage.emplace(id, read_matrix(source, line));
 
-      buffer += line += " ";
+        }
     }
-
-   return buffer;
 }
 
- //       if (str == "ID_1:" && str == "ID_2:")
- //       {
- //           key = str;
- //           continue;
- //       }//
-
- //       auto x = splitString(str, ' ');//
-
- //       
- //   }//
-
- //   std::cout << "Reading finished. " << storage.size() << " numbers were read!" << std::endl
- //             << std::endl;
-//}
-
-bool Mat3Storage::try_add(const std::string &id, const mat3 &mat)
+const mat3 &Mat3Storage::get(const std::string &id)
 {
-    return false;
+    auto it = m_storage.find(id);
+    if (it == m_storage.end())
+    {
+        std::cout << "hasn't key" << std::endl;
+    }
+    
+    return m_storage[id];
 }
+
+// bool Mat3Storage::try_add(const std::string &id, const mat3 &mat)
+//{
+//     return false;
+// }
