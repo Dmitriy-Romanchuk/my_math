@@ -48,9 +48,8 @@ void Mat3Storage::scan_file(const std::string &file)
             //        int_vec.push_back(stoi(digit));
             //    }
             //}
-            
-            
-            m_storage.emplace(id, read_matrix(source, line));
+
+            m_storage.emplace(id, read_matrix(source).data());
 
         }
     }

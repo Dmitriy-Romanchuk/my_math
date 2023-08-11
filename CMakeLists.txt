@@ -4,7 +4,7 @@ SET(CMAKE_CXX_COMPILER g++)
 
 project(main)
 
-include_directories(./src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
@@ -12,7 +12,6 @@ set(SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/src/class_mat3.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/storage.cpp
 )
-add_library(main STATIC ${SOURCE})
 
 add_executable(mat3 ${SOURCE})
 

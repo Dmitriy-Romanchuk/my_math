@@ -7,6 +7,7 @@ set(TEST_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/tests.cpp
 )
 
+add_library(main STATIC ${SOURCE})
 add_executable(tests ${TEST_SOURCE})
 target_link_libraries(tests PRIVATE simple_test)
 target_link_libraries(tests PRIVATE main)

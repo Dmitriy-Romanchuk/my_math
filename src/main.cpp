@@ -53,14 +53,14 @@ int main(int argc, char *argv[])
 
    Mat3Storage storage;
 
-   //storage.scan_file(default_input_path);
-   //auto& test = storage.get("ID_1");
-   //test.show();
-   //auto& test1 = storage.get("ID_2");
-   //test1.show();
-//
-   //mat3 result_matrix = mat3::multiply(test, test1);
-   //result_matrix.show();
+   storage.scan_file(default_input_path);
+   auto& test = storage.get("ID_1");
+   test.show();
+   auto& test1 = storage.get("ID_2");
+   test1.show();
+
+   mat3 result_matrix = mat3::multiply(test, test1);
+   result_matrix.show();
 
    return EXIT_SUCCESS;
 }

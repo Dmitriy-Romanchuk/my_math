@@ -93,23 +93,24 @@ void write_to_file(const std::string &output_path, const mat3 &result)
     std::cout << "File was written!" << std::endl;
 }
 
-int *read_matrix(std::ifstream &source, std::string &line)
+Mat3RawData& read_matrix(std::ifstream &source)
 {
-    int *arr = new int[9];
-    //int arr[9]{};
-    int index = 0;
+    static Mat3RawData buffer;
+    std::string line;
 
     for (size_t i = 0; i < 3; ++i)
     {
         getline(source, line);
         auto x = splitString(line, ' ');
 
+        size_t offset = 0;
         for (const auto &digit : x)
         {
-            arr[index] = stoi(digit);
-            ++index;
+            const size_t index = i + offset;
+            buffer[index] = stoi(digit);
+            offset++;
         }
     }
 
-    return arr;
+    return buffer;
 }
