@@ -93,7 +93,7 @@ void write_to_file(const std::string &output_path, const mat3 &result)
     std::cout << "File was written!" << std::endl;
 }
 
-Mat3RawData& read_matrix(std::ifstream &source)
+Mat3RawData &read_matrix(std::ifstream &source)
 {
     static Mat3RawData buffer;
     std::string line;
@@ -106,7 +106,7 @@ Mat3RawData& read_matrix(std::ifstream &source)
         size_t offset = 0;
         for (const auto &digit : x)
         {
-            const size_t index = i + offset;
+            const size_t index = i * 3 + offset;
             buffer[index] = stoi(digit);
             offset++;
         }
