@@ -33,44 +33,17 @@ std::vector<std::string> splitString(const std::string &str, char delimeter)
     return result;
 }
 
-// std::vector<int> read_from_file(const std::string &input_path) // reading numbers from file on the disk and put them into vector<int> int_vec
-//{
-//     std::ifstream source(input_path.c_str());
-//     std::vector<int> int_vec;
-//
-//     std::string str = "";
-//
-//     if (!source.is_open())
-//     {
-//         std::cout << "File cannot open." << std::endl;
-//         exit(EXIT_FAILURE);
-//     }
-//
-//     std::cout << "Starting reading matrix from file..." << std::endl;
-//
-//     while (!source.eof())
-//     {
-//
-//         getline(source, str);
-//
-//         if (str == "****")
-//         {
-//             continue;
-//         }
-//
-//         auto x = splitString(str, ' ');
-//
-//         for (const auto &digit : x)
-//         {
-//             int_vec.push_back(stoi(digit));
-//         }
-//     }
-//
-//     std::cout << "Reading finished. " << int_vec.size() << " numbers were read!" << std::endl
-//               << std::endl;
-//
-//     return int_vec;
-// }
+std::ostream &operator<<(std::ostream &stream, const mat3 &matrix)
+{
+    auto data = matrix.get_data();
+
+    for (size_t i = 0; i < data.size(); i += 3)
+    {
+        stream << data[i] << " " << data[i + 1] << " " << data[i + 2] << "\n";
+    }
+
+    return stream;
+}
 
 //------------------------------------------------------------------------------------------------------------
 
@@ -83,19 +56,14 @@ void write_to_file(const std::string &output_path, const mat3 &result)
         exit(EXIT_FAILURE);
     }
 
-    std::vector<int> data = result.get_data();
-
-    for (size_t i = 0; i < data.size(); i += 3)
-    {
-        output << data[i] << " " << data[i + 1] << " " << data[i + 2] << "\n";
-    }
+    output << result;
 
     std::cout << "File was written!" << std::endl;
 }
 
-Mat3RawData& read_matrix(std::ifstream &source)
+mat3::Mat3RawData &read_matrix(std::ifstream &source)
 {
-    static Mat3RawData buffer;
+    static mat3::Mat3RawData buffer;
     std::string line;
 
     for (size_t i = 0; i < 3; ++i)
@@ -106,7 +74,7 @@ Mat3RawData& read_matrix(std::ifstream &source)
         size_t offset = 0;
         for (const auto &digit : x)
         {
-            const size_t index = i + offset;
+            const size_t index = i * 3 + offset;
             buffer[index] = stoi(digit);
             offset++;
         }

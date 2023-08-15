@@ -35,22 +35,7 @@ void Mat3Storage::scan_file(const std::string &file)
         if ((line[line.size() - 1]) == ':')
         {
             id = line.substr(0, line.size() - 1);
-            std::cout << id << std::endl;
-
-            //for (size_t i = 0; i < 3; ++i)
-            //{
-            //    getline(source, line);
-//
-            //    auto x = splitString(line, ' ');
-//
-            //    for (const auto &digit : x)
-            //    {
-            //        int_vec.push_back(stoi(digit));
-            //    }
-            //}
-
             m_storage.emplace(id, read_matrix(source).data());
-
         }
     }
 }

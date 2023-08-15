@@ -13,21 +13,13 @@ mat3::mat3(int _el_11, int _el_12, int _el_13, int _el_21, int _el_22, int _el_2
 {
 }
 
-mat3::mat3(int* arr)
+mat3::mat3(int *arr)
     : el_11(arr[0]), el_12(arr[1]), el_13(arr[2]), el_21(arr[3]), el_22(arr[4]), el_23(arr[5]), el_31(arr[6]), el_32(arr[7]), el_33(arr[8])
 {
 }
 
 mat3::~mat3()
 {
-}
-
-void mat3::show() const
-{
-    std::cout << el_11 << " " << el_12 << " " << el_13 << std::endl
-              << el_21 << " " << el_22 << " " << el_23 << std::endl
-              << el_31 << " " << el_32 << " " << el_33 << std::endl
-              << std::endl;
 }
 
 void mat3::multiply(const mat3 &first, const mat3 &second, mat3 &result)
@@ -52,6 +44,13 @@ mat3 mat3::multiply(const mat3 &first, const mat3 &second)
     return result;
 }
 
+mat3::Mat3RawData mat3::get_data() const
+{
+    Mat3RawData elements{el_11, el_12, el_13, el_21, el_22, el_23, el_31, el_32, el_33};
+
+    return elements;
+}
+
 bool mat3::operator==(const mat3 &other) const
 {
     return (el_11 == other.el_11 && el_12 == other.el_12 && el_13 == other.el_13 && el_21 == other.el_21 && el_22 == other.el_22 && el_23 == other.el_23 && el_31 == other.el_31 && el_32 == other.el_32 && el_33 == other.el_33);
@@ -60,11 +59,4 @@ bool mat3::operator==(const mat3 &other) const
 bool mat3::operator!=(const mat3 &other) const
 {
     return (*this == other) == false;
-}
-
-std::vector<int> mat3::get_data() const
-{
-    std::vector<int> elements = {el_11, el_12, el_13, el_21, el_22, el_23, el_31, el_32, el_33};
-
-    return elements;
 }
