@@ -56,8 +56,8 @@ int test_no_equal_operator([[maybe_unused]] int argc, [[maybe_unused]] char *arg
 
 int test_scan_file([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 {
-   
-    const char* default_input_path = "test_matrix.txt";
+
+    const char *default_input_path = "test_matrix.txt";
 
     mat3 first_matrix = {10, 0, 0,
                          0, 10, 0,
@@ -67,8 +67,9 @@ int test_scan_file([[maybe_unused]] int argc, [[maybe_unused]] char *argv[])
 
     storage.scan_file(default_input_path);
 
+    mat3 second_matrix = storage.get("ID_TEST");
 
-    return first_matrix == storage.get("ID_TEST");
+    return (first_matrix == second_matrix) == EXIT_SUCCESS;
 }
 
 void initializeTests()
@@ -78,5 +79,5 @@ void initializeTests()
     tests.addTest("test_multiply", &test_multiply);
     tests.addTest("test_equal_operator", &test_equal_operator);
     tests.addTest("test_no_equal_operator", &test_no_equal_operator);
-    tests.addTest("test_read_from_file", &test_scan_file);
+    tests.addTest("test_scan_file", &test_scan_file);
 }

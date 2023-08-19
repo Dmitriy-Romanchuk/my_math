@@ -52,7 +52,10 @@
         "variant": "cpp",
         "test_equal_operator": "cpp",
         "cassert": "cpp",
-        "cstring": "cpp"
+        "cstring": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp"
     },
     "cmake.configureOnOpen": false
 }

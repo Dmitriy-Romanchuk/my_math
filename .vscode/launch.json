@@ -5,7 +5,7 @@
             "name": "C++ Debug (gdb)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/.build/mat3",
+            "program": "${workspaceFolder}/.build/",
             "preLaunchTask": "Build C++ project",
             "args": [],
             "stopAtEntry": false,
@@ -13,7 +13,7 @@
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "c:\\mingw\\bin\\gdb.exe",
+            "miDebuggerPath": "C:\\w64devkit-1.19.0\\w64devkit\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

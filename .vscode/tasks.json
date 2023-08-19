@@ -17,10 +17,10 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cmake -B ${config:build_dir}",
+            "command": "cmake -B ${config:build_dir}"
         },
         {
-            "label": "Build CMake with Test",
+            "label": "Build CMake",
             "type": "shell",
             "group": {
                 "kind": "build",
@@ -32,16 +32,16 @@
             ]
         },
         {
-            "label": "Ctest",
+            "label": "main",
             "type": "shell",
             "group": {
                 "kind": "test",
                 "isDefault": true
             },
-            "command": "cd ${config:build_dir} && ctest",
+            "command": "cd ${config:build_dir}",
             "dependsOn": [
-                "Build CMake with Test"
+                "Build CMake"
             ]
-        }
+        },
     ]
 }

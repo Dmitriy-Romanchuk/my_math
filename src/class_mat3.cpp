@@ -1,7 +1,6 @@
 #include "class_mat3.h"
 
 #include <iostream>
-#include <vector>
 
 mat3::mat3()
     : el_11(0), el_12(0), el_13(0), el_21(0), el_22(0), el_23(0), el_31(0), el_32(0), el_33(0)
