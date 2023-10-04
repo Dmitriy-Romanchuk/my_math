@@ -57,5 +57,5 @@
         "concepts": "cpp",
         "numbers": "cpp"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": true
 }
