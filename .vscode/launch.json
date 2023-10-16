@@ -5,14 +5,14 @@
             "name": "C++ Debug (gdb)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/.build/mat3",
+            "program": "${workspaceFolder}/.build/Debug/mat3",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -20,9 +20,19 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build CMake",
-            "internalConsoleOptions": "neverOpen"
-            
-        }
+            "preLaunchTask": "Build CMake (Debug)",
+            "internalConsoleOptions": "neverOpen" 
+        },
+        // {
+        //     "name": "C++ Release",
+        //     "type": "cppvsdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceFolder}/.build/Release/mat3",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}",
+        //     "preLaunchTask": "Build CMake (Release)",
+        //     "internalConsoleOptions": "neverOpen"
+        // }
     ]
 }

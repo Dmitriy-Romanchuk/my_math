@@ -2,25 +2,59 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Configure",
+            "label": "Configure Debug",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "cmake -B .build -S . -G 'Ninja'",
+            "command": "cmake -B .build/Debug -S . -G 'Ninja' -DCMAKE_BUILD_TYPE=Debug",
             
         },
         {
-            "label": "Build CMake",
+            "label": "Configure Release",
             "type": "shell",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "ninja -C .build -d explain",
+            "command": "cmake -B .build/Release -S . -G 'Ninja' -DCMAKE_BUILD_TYPE=Release",
+            
+        },
+        {
+            "label": "Build CMake (Debug)",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "ninja -C .build/Debug",
             "dependsOn": [
-                "Configure"
+                "Configure Debug"
+            ]
+        },
+        {
+            "label": "Build CMake (Release)",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "ninja -C .build/Release",
+            "dependsOn": [
+                "Configure Release"
+            ]
+        },
+        {
+            "label": "Run Release build",
+            "type": "shell",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "command": "./.build/Release/mat3",
+            "dependsOn": [
+                "Build CMake (Release)"
             ]
         },
     ]
